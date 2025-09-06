@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Omnia 🎉</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="overlay">
+    <h1>🎂 بطاقة تهنئة 🎂</h1>
+    <button id="startBtn">Start 🎉</button>
+  </div>
+
+  <canvas id="fireworks"></canvas>
+
+  <div id="balloons"></div>
+
+  <div id="cake">🎂</div>
+
+  <div id="message">
+    <p>
+      كل سنه و اختي القزعه الهبله طيبه😂 طبعا العيوطه الي بتعيط علي اي حاجه زي الميزانيه الي باظت😂<br>
+      و الي بتقول علي نفسها كبرا بس هي طفله قال ايه تدهن فولترين😂<br>
+      كل سنه و طيبه و عيد سعيد عليك و تحققي كل الي نفسك في و صح عبال من نخلص منك و نجوزك😂<br>
+      الي اختي الكبيره مع خالص تحياتي 🙂
+    </p>
+  </div>
+
+  <audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+const startBtn = document.getElementById("startBtn");
+const overlay = document.getElementById("overlay");
+const fireworksCanvas = document.getElementById("fireworks");
+const balloonsContainer = document.getElementById("balloons");
+const cake = document.getElementById("cake");
+const message = document.getElementById("message");
+const music = document.getElementById("music");
+
+const ctx = fireworksCanvas.getContext("2d");
+fireworksCanvas.width = window.innerWidth;
+fireworksCanvas.height = window.innerHeight;
+
+// 🎆 ألعاب نارية
+let fireworks = [];
+
+function random(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function Firework(x, y) {
+  this.x = x;
+  this.y = y;
+  this.radius = random(2, 4);
+  this.color = `hsl(${random(0, 360)},100%,50%)`;
+  this.vx = random(-3, 3);
+  this.vy = random(-3, 3);
+  this.alpha = 1;
+  this.update = () => {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.alpha -= 0.01;
+  };
+  this.draw = () => {
+    ctx.beginPath();
+    ctx.globalAlpha = this.alpha;
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  };
+}
+
+function animateFireworks() {
+  requestAnimationFrame(animateFireworks);
+  ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+  fireworks.forEach((fw, i) => {
+    fw.update();
+    fw.draw();
+    if (fw.alpha <= 0) fireworks.splice(i, 1);
+  });
+}
+
+function launchFirework() {
+  const x = random(0, fireworksCanvas.width);
+  const y = random(0, fireworksCanvas.height / 2);
+  for (let i = 0; i < 50; i++) {
+    fireworks.push(new Firework(x, y));
+  }
+}
+
+setInterval(launchFirework, 1500);
+animateFireworks();
+
+// 🎈 بالونات
+function createBalloon() {
+  const balloon = document.createElement("div");
+  balloon.classList.add("balloon");
+  balloon.innerHTML = "🎈";
+  balloon.style.left = Math.random() * 100 + "vw";
+  balloon.style.animationDuration = (Math.random() * 5 + 5) + "s";
+  balloonsContainer.appendChild(balloon);
+
+  setTimeout(() => balloon.remove(), 10000);
+}
+
+// تشغيل كل ثانية
+setInterval(createBalloon, 1000);
+
+// 🎂 إظهار كل شيء بعد الضغط
+startBtn.addEventListener("click", () => {
+  overlay.style.display = "none";
+  cake.style.display = "block";
+  message.style.display = "block";
+  music.play();
+});
